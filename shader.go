@@ -2,14 +2,16 @@ package gosigl
 
 import (
 	"fmt"
-	opengl "github.com/go-gl/gl/v4.1-core/gl"
 	"strings"
+
+	opengl "github.com/go-gl/gl/v4.1-core/gl"
 )
 
 type ShaderType uint32
 
 const VertexShader = ShaderType(opengl.VERTEX_SHADER)
 const FragmentShader = ShaderType(opengl.FRAGMENT_SHADER)
+const GeometryShader = ShaderType(opengl.GEOMETRY_SHADER)
 
 type Context struct {
 	context uint32
@@ -80,4 +82,3 @@ func NewShader() Context {
 
 	return context
 }
-
