@@ -20,7 +20,7 @@ func ClearColour(red float32, green float32, blue float32, alpha float32) {
 
 func Clear(bufferBits ...uint32) {
 	mask := uint32(0)
-	for _,buf := range bufferBits {
+	for _, buf := range bufferBits {
 		mask = mask | buf
 	}
 	opengl.Clear(mask)
@@ -31,7 +31,7 @@ func EnableBlend() {
 	opengl.BlendFunc(opengl.SRC_ALPHA, opengl.ONE_MINUS_SRC_ALPHA)
 }
 
-func DisableBlend(){
+func DisableBlend() {
 	opengl.Disable(opengl.BLEND)
 }
 
@@ -48,4 +48,11 @@ func EnableCullFace(cullSide uint32, winding uint32) {
 	opengl.Enable(opengl.CULL_FACE)
 	opengl.CullFace(cullSide)
 	opengl.FrontFace(winding)
+}
+
+func ReadPixelsDepth(x, y, w, h int32) []float32 {
+	resultBuffer := make([]float32, w*h)
+	opengl.ReadPixels(x, y, w, h, opengl.DEPTH_COMPONENT, opengl.FLOAT, opengl.Ptr(resultBuffer))
+
+	return resultBuffer
 }
